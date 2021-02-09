@@ -1,0 +1,41 @@
+spring:
+  #mysql配置
+  datasource:
+    username: root
+    password: xxxxxx
+    url: jdbc:mysql://localhost:3306/community?characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #druid数据源配置
+    #配置初始化大小、最小、最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    #配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 2000
+    #配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 600000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # stat:监控提交 wall:封装sql注入 log4j:日志
+    filters: stat,wall,log4j
+    maxPoolpreparedStatementPerConnectionSize: 20
+    useGlobaDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.nowcoder.community.entity
+  configuration:
+    use-generated-keys: true
+    # user_id 匹配 userId(匹配驼峰)
+    map-underscore-to-camel-case: true
+
+

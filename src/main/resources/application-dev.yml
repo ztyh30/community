@@ -28,6 +28,18 @@ spring:
     maxPoolpreparedStatementPerConnectionSize: 20
     useGlobaDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #配置邮箱服务
+  mail:
+    host: smtp.163.com
+    # 465端口是为SMTPS(SMTP-over-SSL)协议服务开放的
+    port: 465
+    username: lane_1999@163.com
+    #密码使用的是上面的授权密码，而不是邮箱密码
+    password: FQIBPADQMMGEMSCS
+    protocol: smtps
+    properties.smtp.auth: true
+    # 开启ssl安全协议
+    properties.mail.smtp.ssl.enable: true
 
 #mybatis配置
 mybatis:
@@ -38,4 +50,4 @@ mybatis:
     # user_id 匹配 userId(匹配驼峰)
     map-underscore-to-camel-case: true
 
-
+community.path.domain: http://localhost:8080

@@ -50,4 +50,7 @@ mybatis:
     # user_id 匹配 userId(匹配驼峰)
     map-underscore-to-camel-case: true
 
+#域名
 community.path.domain: http://localhost:8080
+#文件上传位置
+community.path.upload: d:/ProgramFiles/work/data/upload

@@ -1,13 +1,16 @@
 package com.nowcoder.community;
 
 import com.nowcoder.community.dao.DiscussPostMapper;
+import com.nowcoder.community.dao.LoginTicketMapper;
 import com.nowcoder.community.dao.UserMapper;
 import com.nowcoder.community.entity.DiscussPost;
+import com.nowcoder.community.entity.LoginTicket;
 import com.nowcoder.community.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +26,9 @@ public class MapperTest {
 
     @Autowired
     private DiscussPostMapper discussPostMapper;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
 
     @Test
     public void testUserSelect() {
@@ -63,5 +69,38 @@ public class MapperTest {
         System.out.println("总帖数："+rows);
 
     }
+
+    @Test
+    public void testInsetLoginTicket() {
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(101);
+        loginTicket.setTicket("sdavcd");
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000*60*10));
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectAndUpdateTicket() {
+        LoginTicket loginTicket = loginTicketMapper.selectByTicket("sdavcd");
+        System.out.println(loginTicket.getStatus()+"::before::");
+        loginTicketMapper.updateStatus(loginTicket.getTicket(),1);
+        loginTicket = loginTicketMapper.selectByTicket(loginTicket.getTicket());
+        System.out.println(loginTicket.getStatus()+"::after::");
+    }
+
+    @Test
+    public void testInsertDiscussPost() {
+        DiscussPost discussPost = new DiscussPost();
+        discussPost.setUserId(154);
+        discussPost.setTitle("JAVA后台开发学习路线");
+        discussPost.setContent("java se -> java ee -> mysql -> 中间件 -> 分布式");
+        discussPost.setType(0);
+        discussPost.setStatus(0);
+        discussPost.setCommentCount(0);
+        discussPost.setCreateTime(new Date());
+        discussPostMapper.insertDiscussPost(discussPost);
+    }
+
 
 }

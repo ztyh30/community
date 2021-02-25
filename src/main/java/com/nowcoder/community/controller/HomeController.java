@@ -34,7 +34,7 @@ public class HomeController {
         //因为SpringMVC初始化时会自动创建page对象，并注入到model中
         page.setRows(discussPostService.findDiscussPostRows(0));
         page.setPath("/index");
-        List<DiscussPost> list = discussPostService.findDiscussPosts(0, 0, 10);
+        List<DiscussPost> list = discussPostService.findDiscussPosts(0, page.getOffset(), page.getLimit());
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (null != list) {
             for (DiscussPost post : list) {

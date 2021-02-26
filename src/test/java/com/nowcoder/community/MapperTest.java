@@ -1,8 +1,10 @@
 package com.nowcoder.community;
 
+import com.nowcoder.community.dao.CommentMapper;
 import com.nowcoder.community.dao.DiscussPostMapper;
 import com.nowcoder.community.dao.LoginTicketMapper;
 import com.nowcoder.community.dao.UserMapper;
+import com.nowcoder.community.entity.Comment;
 import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.entity.LoginTicket;
 import com.nowcoder.community.entity.User;
@@ -100,6 +102,20 @@ public class MapperTest {
         discussPost.setCommentCount(0);
         discussPost.setCreateTime(new Date());
         discussPostMapper.insertDiscussPost(discussPost);
+    }
+
+    @Autowired
+    private CommentMapper commentMapper;
+
+    @Test
+    public void testCommentMapper() {
+        List<Comment> comments = commentMapper.selectCommentsByEntity(1,228,0,Integer.MAX_VALUE);
+        for(Comment comment : comments) {
+            System.out.println(comment);
+        }
+        int count = commentMapper.selectCommentCountByEntity(1,228);
+        System.out.println("*******count:*********"+count);
+
     }
 
 
